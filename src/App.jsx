@@ -160,7 +160,7 @@ const translations = {
 
     features: {
       label: "لماذا Vexora",
-      title1: "مصممة من أجل",
+      title1: " مصممة من أجل ",
       title2: "ترفيهك.",
       description:
         "تجمع Vexora بين واجهة نظيفة ومحتوى يعمل عبر الخوادم ونظام تفعيل في تجربة واحدة بسيطة.",
