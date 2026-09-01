@@ -171,7 +171,7 @@ const translations = {
       download: "التحميل",
       about: "عن Vexora",
       downloadButton: "تحميل",
-      activation: "طلب التفعيل",
+      activation: "طلب التفعيل | خصم 50% لأول 100 مشترك",
     },
 
     hero: {
@@ -222,7 +222,7 @@ const translations = {
       point1: "دعم أكواد التفعيل",
       point2: "التحقق من الترخيص",
       point3: "حماية الوصول إلى التطبيق",
-      button: "طلب كود التفعيل",
+      button: "طلب كود التفعيل خصم 50% لأول 100 مشترك",
       license: "ترخيص VEXORA",
       verified: "تم التحقق من التفعيل",
       ready: "الترخيص جاهز للاستخدام",
@@ -306,7 +306,7 @@ const translations = {
       download: "Download",
       about: "About",
       downloadButton: "Download",
-      activation: "Request Activation",
+      activation: "Request Activation | 50% off for the first 100 subscribers",
     },
 
     hero: {
@@ -357,7 +357,7 @@ const translations = {
       point1: "Activation code support",
       point2: "License verification",
       point3: "Protected application access",
-      button: "Request Activation Code",
+      button: "Request Activation Code 50% off for the first 100 subscribers",
       license: "VEXORA LICENSE",
       verified: "Activation verified",
       ready: "License ready to use",
