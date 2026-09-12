@@ -604,6 +604,28 @@ function App() {
   }, []);
 
   /*
+=================================================
+AUTO SCROLL TO DOWNLOAD
+=================================================
+*/
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const downloadSection =
+        document.getElementById("download");
+
+      if (downloadSection) {
+        downloadSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  /*
   =================================================
   UPDATE.JSON
   =================================================
@@ -1019,8 +1041,8 @@ function App() {
 
                 <i
                   className={`fa-solid ${languageOpen
-                      ? "fa-chevron-up"
-                      : "fa-chevron-down"
+                    ? "fa-chevron-up"
+                    : "fa-chevron-down"
                     }`}
                 />
               </button>
@@ -1032,8 +1054,8 @@ function App() {
                   <button
                     type="button"
                     className={`language-option ${language === "ar"
-                        ? "active"
-                        : ""
+                      ? "active"
+                      : ""
                       }`}
                     onClick={() => {
                       changeLanguage("ar");
@@ -1057,8 +1079,8 @@ function App() {
                   <button
                     type="button"
                     className={`language-option ${language === "en"
-                        ? "active"
-                        : ""
+                      ? "active"
+                      : ""
                       }`}
                     onClick={() => {
                       changeLanguage("en");
