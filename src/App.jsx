@@ -1006,7 +1006,7 @@ AUTO SCROLL TO DOWNLOAD
               {t.nav.downloadButton}
             </a>
 
-            <a
+            {/* <a
               href={ACTIVATION_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -1015,7 +1015,7 @@ AUTO SCROLL TO DOWNLOAD
               <i className="fa-solid fa-key" />
 
               {t.nav.activation}
-            </a>
+            </a> */}
 
             <div
               className={`language-selector ${languageOpen ? "language-open" : ""
@@ -1149,7 +1149,7 @@ AUTO SCROLL TO DOWNLOAD
                 <i className="fa-solid fa-arrow-down" />
               </a>
 
-              <a
+              {/* <a
                 href={ACTIVATION_URL}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1158,7 +1158,7 @@ AUTO SCROLL TO DOWNLOAD
                 {t.hero.activation}
 
                 <i className="fa-brands fa-whatsapp" />
-              </a>
+              </a> */}
 
             </div>
 
@@ -1666,7 +1666,7 @@ AUTO SCROLL TO DOWNLOAD
 
               </div>
 
-              <a
+              {/* <a
                 href={ACTIVATION_URL}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1677,7 +1677,7 @@ AUTO SCROLL TO DOWNLOAD
                 {t.activation.button}
 
                 <i className="fa-solid fa-arrow-up-right-from-square" />
-              </a>
+              </a> */}
 
             </div>
 
@@ -2230,13 +2230,13 @@ AUTO SCROLL TO DOWNLOAD
                 {t.footer.activation}
               </a>
 
-              <a
+              {/* <a
                 href={ACTIVATION_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {t.footer.requestCode}
-              </a>
+              </a> */}
 
               <a href="#download">
                 {t.footer.downloads}
