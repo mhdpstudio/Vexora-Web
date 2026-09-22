@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./style/App.css";
 
@@ -11,6 +11,13 @@ ACTIVATION
 */
 
 const ACTIVATION_URL = "https://wa.link/di4jtk";
+
+// Replace this with the direct .mp4/.webm URL you upload to Cloudflare R2.
+// The Google Drive URL is kept as a preview fallback for now.
+const VIDEO_URL =
+  "https://drive.google.com/file/d/12jzV65rS4QFy4lC2VzY63xG4R467GLs_/view?usp=drivesdk";
+
+const CATALOG_IMAGE = "/gallery/all-cartoons.png";
 
 /*
 =========================================================
@@ -112,42 +119,22 @@ FEATURES
 */
 
 const features = [
-  {
-    icon: "fa-solid fa-bolt",
-    title: "Fast & Lightweight",
-    description:
-      "Vexora is designed to provide a smooth experience without unnecessary background overhead.",
-  },
-  {
-    icon: "fa-solid fa-server",
-    title: "Server-Powered Content",
-    description:
-      "Content delivery is handled through Vexora's servers, helping keep the application lightweight and efficient.",
-  },
-  {
-    icon: "fa-solid fa-shield-halved",
-    title: "Secure Activation",
-    description:
-      "Vexora uses an activation system to manage licensed access and protect application features.",
-  },
-  {
-    icon: "fa-solid fa-key",
-    title: "Activation Codes",
-    description:
-      "Request an activation code and enter it directly inside Vexora to activate your license.",
-  },
-  {
-    icon: "fa-solid fa-mobile-screen-button",
-    title: "Multi-Platform",
-    description:
-      "Use Vexora across supported devices, with additional platforms and architectures planned.",
-  },
-  {
-    icon: "fa-solid fa-arrows-rotate",
-    title: "Regular Updates",
-    description:
-      "Vexora continues to evolve with new versions, improvements and additional features.",
-  },
+  { icon: "fa-solid fa-ban", title: "No Ads", description: "استمتع بالمحتوى بدون إعلانات مزعجة أو نوافذ تقطع عليك المشاهدة." },
+  { icon: "fa-solid fa-download", title: "Download Content", description: "إمكانية تحميل المحتوى المدعوم للمشاهدة بسهولة عندما يناسبك." },
+  { icon: "fa-solid fa-gauge-high", title: "Low Data Usage", description: "تجربة مصممة لتكون خفيفة في استهلاك الإنترنت قدر الإمكان." },
+  { icon: "fa-solid fa-clapperboard", title: "100+ Titles", description: "مكتبة تضم أكثر من 100 كرتون وفيلم ومسلسل، مع إضافة محتوى جديد باستمرار." },
+  { icon: "fa-solid fa-plus", title: "Request Any Cartoon", description: "اطلب الكرتون أو المحتوى الذي تحبه، ويتم النظر في إضافته للمكتبة." },
+  { icon: "fa-solid fa-rotate", title: "Daily Additions", description: "المكتبة تستمر في النمو مع إضافة أفلام ومسلسلات وحلقات جديدة باستمرار." },
+  { icon: "fa-solid fa-bookmark", title: "Bookmarks", description: "احفظ المحتوى الذي يعجبك لتعود إليه بسرعة في أي وقت." },
+  { icon: "fa-solid fa-clock-rotate-left", title: "Continue Watching", description: "تابع ما بدأت مشاهدته بسهولة بدل البحث عنه من جديد." },
+  { icon: "fa-solid fa-magnifying-glass", title: "Fast Search", description: "ابحث عن أفلامك وكرتوناتك ومسلسلاتك المفضلة بسرعة." },
+  { icon: "fa-solid fa-layer-group", title: "Organized Library", description: "تصنيفات وأقسام تساعدك على الوصول للمحتوى بشكل مرتب وواضح." },
+  { icon: "fa-solid fa-mobile-screen-button", title: "Windows & Android", description: "دعم Windows وAndroid مع استمرار تطوير المنصات والمعماريات." },
+  { icon: "fa-solid fa-arrows-rotate", title: "Continuous Updates", description: "تحديثات وتحسينات مستمرة للمكتبة والتطبيق وتجربة الاستخدام." },
+  { icon: "fa-solid fa-bolt", title: "Fast & Lightweight", description: "واجهة سريعة وخفيفة بدون تعقيد أو تحميل زائد على الجهاز." },
+  { icon: "fa-solid fa-shield-halved", title: "License Activation", description: "نظام تفعيل وإدارة ترخيص للوصول إلى المميزات المدعومة." },
+  { icon: "fa-solid fa-heart", title: "Made for You", description: "التطبيق يتطور بناءً على احتياجات المستخدمين واقتراحاتهم للمحتوى." },
+  { icon: "fa-solid fa-headset", title: "WhatsApp Activation", description: "إتمام الدفع والتفعيل من خلال WhatsApp بخطوات واضحة وبسيطة." },
 ];
 
 /*
@@ -168,10 +155,12 @@ const translations = {
       home: "الرئيسية",
       features: "المميزات",
       gallery: "المعرض",
+      guide: "طريقة الاشتراك",
+      pricing: "الاشتراك",
       download: "التحميل",
       about: "عن Vexora",
       downloadButton: "تحميل",
-      activation: "طلب التفعيل | خصم 50% لأول 100 مشترك",
+      activation: "التفعيل",
     },
 
     hero: {
@@ -195,7 +184,7 @@ const translations = {
       title1: "مصممة من أجل ",
       title2: "ترفيهك.",
       description:
-        "تجمع Vexora بين واجهة نظيفة ومحتوى يعمل عبر الخوادم ونظام تفعيل في تجربة واحدة بسيطة.",
+        "من غير إعلانات، مع تحميل، استهلاك إنترنت منخفض، مكتبة تكبر باستمرار، وإمكانية طلب المحتوى اللي نفسك تشوفه."
     },
 
     gallery: {
@@ -253,6 +242,60 @@ const translations = {
         "يتم تحميل معلومات الإصدارات والتوفر تلقائيًا من خادم تحديثات Vexora.",
     },
 
+    video: {
+      label: "شوف VEXORA",
+      title1: "شوف التطبيق",
+      title2: "قبل ما تشترك.",
+      description: "اتفرج على جولة سريعة داخل Vexora وشوف شكل التطبيق وطريقة الاستخدام.",
+      play: "تشغيل",
+      pause: "إيقاف",
+      mute: "كتم",
+      unmute: "تشغيل الصوت",
+      fullscreen: "ملء الشاشة",
+    },
+
+    journey: {
+      label: "بكل بساطة",
+      title1: "3 خطوات",
+      title2: "وتبدأ تتفرج.",
+      description: "كل اللي عليك تعمله: حمّل التطبيق، أتمم الدفع عبر WhatsApp، وبعدها فعّل التطبيق بالكود.",
+      step1: "تحميل التطبيق",
+      step1Desc: "اختار جهازك من قسم التحميل ونزّل أحدث إصدار مناسب ليك.",
+      step2: "إتمام الدفع عبر WhatsApp",
+      step2Desc: "تواصل معنا عبر WhatsApp لإتمام الدفع والحصول على بيانات التفعيل.",
+      step3: "تفعيل التطبيق",
+      step3Desc: "افتح Vexora، أدخل كود التفعيل، وابدأ استخدام التطبيق.",
+      openWhatsApp: "إتمام الدفع عبر WhatsApp",
+    },
+
+    pricing: {
+      label: "اشتراك VEXORA",
+      title1: "ادفع مرة واحدة.",
+      title2: "واستمتع مدى الحياة.",
+      description: "لا اشتراك شهري ولا سنوي. ترخيص مدى الحياة بدون إعلانات، مع استمرار تطوير التطبيق والمحتوى.",
+      current: "250 جنيه",
+      original: "500 جنيه",
+      lifetime: "مدى الحياة",
+      discount: "خصم 50%",
+      noMonthly: "بدون اشتراك شهري",
+      noYearly: "بدون اشتراك سنوي",
+      noAds: "بدون إعلانات",
+      button: "اشترك وفعّل Vexora",
+      specialTitle: "مميزات خاصة لأول 100 مشترك",
+      special1: "أولوية في طلبات إضافة الكرتونات والمحتوى.",
+      special2: "مميزات وتجارب حصرية يتم إطلاقها تدريجيًا.",
+      special3: "أولوية في الدعم والاقتراحات الخاصة بالمحتوى.",
+    },
+
+    catalog: {
+      label: "مكتبة VEXORA",
+      title1: "أكثر من 100",
+      title2: "عنوان ومحتوى جديد باستمرار.",
+      description: "استكشف صورة تجمع محتوى المكتبة. يتم إضافة أفلام ومسلسلات وكرتونات جديدة باستمرار، ويمكنك اقتراح المحتوى الذي تحبه.",
+      badge: "100+ محتوى",
+      note: "الصورة المعروضة تمثل مكتبة المحتوى داخل Vexora.",
+    },
+
     about: {
       label: "عن Vexora",
       title1: "الترفيه،",
@@ -271,6 +314,8 @@ const translations = {
       support: "الدعم",
       features: "المميزات",
       gallery: "المعرض",
+      guide: "طريقة الاشتراك",
+      pricing: "الاشتراك",
       download: "التحميل",
       about: "عن Vexora",
       windows: "Windows",
@@ -303,10 +348,12 @@ const translations = {
       home: "Home",
       features: "Features",
       gallery: "Gallery",
+      guide: "How it works",
+      pricing: "Pricing",
       download: "Download",
       about: "About",
       downloadButton: "Download",
-      activation: "Request Activation | 50% off for the first 100 subscribers",
+      activation: "Activation",
     },
 
     hero: {
@@ -330,7 +377,7 @@ const translations = {
       title1: "Built for your",
       title2: "entertainment.",
       description:
-        "Vexora combines a clean interface, server-powered content and an activation system into one simple experience.",
+        "No ads, download support, low data usage, a growing library and the ability to request content you want to watch."
     },
 
     gallery: {
@@ -388,6 +435,60 @@ const translations = {
         "Download availability and version information are loaded automatically from the Vexora update server.",
     },
 
+    video: {
+      label: "SEE VEXORA",
+      title1: "See the app",
+      title2: "before you subscribe.",
+      description: "Take a quick tour inside Vexora and see the interface and experience before activation.",
+      play: "Play",
+      pause: "Pause",
+      mute: "Mute",
+      unmute: "Unmute",
+      fullscreen: "Fullscreen",
+    },
+
+    journey: {
+      label: "HOW IT WORKS",
+      title1: "3 simple steps",
+      title2: "and you're watching.",
+      description: "Download the app, complete payment through WhatsApp, then activate Vexora with your code.",
+      step1: "Download the app",
+      step1Desc: "Choose your device from the download section and get the latest supported build.",
+      step2: "Complete payment via WhatsApp",
+      step2Desc: "Contact us through WhatsApp to complete payment and receive your activation details.",
+      step3: "Activate the app",
+      step3Desc: "Open Vexora, enter your activation code, and start using the application.",
+      openWhatsApp: "Complete payment via WhatsApp",
+    },
+
+    pricing: {
+      label: "VEXORA ACCESS",
+      title1: "Pay once.",
+      title2: "Enjoy it for life.",
+      description: "No monthly or yearly subscription. Lifetime access without ads, while the app and content continue to evolve.",
+      current: "250 EGP",
+      original: "500 EGP",
+      lifetime: "Lifetime",
+      discount: "50% OFF",
+      noMonthly: "No monthly fee",
+      noYearly: "No yearly fee",
+      noAds: "No ads",
+      button: "Subscribe & Activate Vexora",
+      specialTitle: "Special features for the first 100 subscribers",
+      special1: "Priority for cartoon and content requests.",
+      special2: "Exclusive features and experiences released over time.",
+      special3: "Priority support and content suggestions.",
+    },
+
+    catalog: {
+      label: "VEXORA LIBRARY",
+      title1: "100+ titles",
+      title2: "with new content added continuously.",
+      description: "Explore a visual preview of the library. New movies, series and cartoons are added continuously, and you can request content you want.",
+      badge: "100+ CONTENT",
+      note: "The image represents the content library inside Vexora.",
+    },
+
     about: {
       label: "ABOUT VEXORA",
       title1: "Entertainment,",
@@ -406,6 +507,8 @@ const translations = {
       support: "Support",
       features: "Features",
       gallery: "Gallery",
+      guide: "How it works",
+      pricing: "Pricing",
       download: "Download",
       about: "About",
       windows: "Windows",
@@ -502,6 +605,17 @@ function App() {
 
   const [zoom, setZoom] =
     useState(1);
+
+  const [isVideoPlaying, setIsVideoPlaying] =
+    useState(false);
+  const [videoProgress, setVideoProgress] =
+    useState(0);
+  const [videoDuration, setVideoDuration] =
+    useState(0);
+  const [videoMuted, setVideoMuted] =
+    useState(false);
+
+  const videoRef = React.useRef(null);
 
   const t = translations[language];
 
@@ -924,6 +1038,58 @@ AUTO SCROLL TO DOWNLOAD
 
   /*
   =================================================
+  VIDEO CONTROLS
+  =================================================
+  */
+
+  const toggleVideo = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      await video.play();
+      setIsVideoPlaying(true);
+    } else {
+      video.pause();
+      setIsVideoPlaying(false);
+    }
+  };
+
+  const handleVideoTime = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    setVideoProgress(video.currentTime);
+    setVideoDuration(video.duration || 0);
+  };
+
+  const seekVideo = (value) => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.currentTime = Number(value);
+    setVideoProgress(Number(value));
+  };
+
+  const toggleVideoMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setVideoMuted(video.muted);
+  };
+
+  const formatTime = (seconds) => {
+    if (!Number.isFinite(seconds)) return "00:00";
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
+
+  const isDriveVideo = VIDEO_URL.includes("drive.google.com");
+  const driveEmbedUrl = isDriveVideo
+    ? VIDEO_URL.replace(/\/view.*$/, "/preview")
+    : VIDEO_URL;
+
+  /*
+  =================================================
   RENDER
   =================================================
   */
@@ -984,6 +1150,14 @@ AUTO SCROLL TO DOWNLOAD
 
             <a href="#gallery">
               {t.nav.gallery}
+            </a>
+
+            <a href="#how-it-works">
+              {t.nav.guide}
+            </a>
+
+            <a href="#pricing">
+              {t.nav.pricing}
             </a>
 
             <a href="#download">
@@ -1311,6 +1485,84 @@ AUTO SCROLL TO DOWNLOAD
           </div>
         </section>
 
+        {/* VIDEO */}
+
+        <section className="video-section" id="video">
+          <div className="section-heading">
+            <span className="section-label">{t.video.label}</span>
+            <h2>
+              {t.video.title1} <span>{t.video.title2}</span>
+            </h2>
+            <p>{t.video.description}</p>
+          </div>
+
+          <div className="video-shell">
+            <div className="video-frame">
+              {isDriveVideo ? (
+                <iframe
+                  src={driveEmbedUrl}
+                  title="Vexora Preview"
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                />
+              ) : (
+                <video
+                  ref={videoRef}
+                  src={VIDEO_URL}
+                  preload="metadata"
+                  onTimeUpdate={handleVideoTime}
+                  onLoadedMetadata={handleVideoTime}
+                  onPlay={() => setIsVideoPlaying(true)}
+                  onPause={() => setIsVideoPlaying(false)}
+                  onEnded={() => setIsVideoPlaying(false)}
+                  playsInline
+                />
+              )}
+
+              <div className="video-glow" />
+              <div className="video-badge">
+                <i className="fa-solid fa-play" />
+                VEXORA PREVIEW
+              </div>
+            </div>
+
+            {!isDriveVideo && (
+              <div className="video-controls">
+                <button type="button" className="video-control-main" onClick={toggleVideo}>
+                  <i className={`fa-solid ${isVideoPlaying ? "fa-pause" : "fa-play"}`} />
+                </button>
+
+                <span className="video-time">{formatTime(videoProgress)}</span>
+
+                <input
+                  className="video-progress"
+                  type="range"
+                  min="0"
+                  max={videoDuration || 0}
+                  step="0.1"
+                  value={videoProgress}
+                  onChange={(event) => seekVideo(event.target.value)}
+                  aria-label="Video progress"
+                />
+
+                <span className="video-time">{formatTime(videoDuration)}</span>
+
+                <button type="button" className="video-control" onClick={toggleVideoMute}>
+                  <i className={`fa-solid ${videoMuted ? "fa-volume-xmark" : "fa-volume-high"}`} />
+                </button>
+
+                <button
+                  type="button"
+                  className="video-control"
+                  onClick={() => videoRef.current?.requestFullscreen?.()}
+                >
+                  <i className="fa-solid fa-expand" />
+                </button>
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* FEATURES */}
 
         <section
@@ -1343,41 +1595,69 @@ AUTO SCROLL TO DOWNLOAD
               (feature) => {
 
                 const arabicFeatures = {
+                  "No Ads": {
+                    title: "بدون إعلانات",
+                    description: "استمتع بالمحتوى بدون إعلانات مزعجة أو نوافذ تقطع عليك المشاهدة.",
+                  },
+                  "Download Content": {
+                    title: "تحميل المحتوى",
+                    description: "إمكانية تحميل المحتوى المدعوم للمشاهدة بسهولة عندما يناسبك.",
+                  },
+                  "Low Data Usage": {
+                    title: "استهلاك إنترنت منخفض",
+                    description: "تجربة مصممة لتكون خفيفة في استهلاك الإنترنت قدر الإمكان.",
+                  },
+                  "100+ Titles": {
+                    title: "أكثر من 100 عنوان",
+                    description: "مكتبة تضم أكثر من 100 كرتون وفيلم ومسلسل، مع إضافة محتوى جديد باستمرار.",
+                  },
+                  "Request Any Cartoon": {
+                    title: "اطلب أي كرتون",
+                    description: "اطلب الكرتون أو المحتوى الذي تحبه، ويتم النظر في إضافته للمكتبة.",
+                  },
+                  "Daily Additions": {
+                    title: "إضافات مستمرة",
+                    description: "المكتبة تستمر في النمو مع إضافة أفلام ومسلسلات وحلقات جديدة باستمرار.",
+                  },
+                  "Bookmarks": {
+                    title: "المفضلة",
+                    description: "احفظ المحتوى الذي يعجبك لتعود إليه بسرعة في أي وقت.",
+                  },
+                  "Continue Watching": {
+                    title: "متابعة المشاهدة",
+                    description: "تابع ما بدأت مشاهدته بسهولة بدل البحث عنه من جديد.",
+                  },
+                  "Fast Search": {
+                    title: "بحث سريع",
+                    description: "ابحث عن أفلامك وكرتوناتك ومسلسلاتك المفضلة بسرعة.",
+                  },
+                  "Organized Library": {
+                    title: "مكتبة منظمة",
+                    description: "تصنيفات وأقسام تساعدك على الوصول للمحتوى بشكل مرتب وواضح.",
+                  },
+                  "Windows & Android": {
+                    title: "Windows و Android",
+                    description: "دعم Windows وAndroid مع استمرار تطوير المنصات والمعماريات.",
+                  },
+                  "Continuous Updates": {
+                    title: "تحديثات مستمرة",
+                    description: "تحديثات وتحسينات مستمرة للمكتبة والتطبيق وتجربة الاستخدام.",
+                  },
                   "Fast & Lightweight": {
                     title: "سريع وخفيف",
-                    description:
-                      "تم تصميم Vexora لتوفير تجربة سلسة وسريعة دون استهلاك غير ضروري للموارد في الخلفية.",
+                    description: "تم تصميم Vexora لتوفير تجربة سلسة وسريعة دون استهلاك غير ضروري للموارد في الخلفية.",
                   },
-
-                  "Server-Powered Content": {
-                    title:
-                      "محتوى يعمل عبر الخوادم",
-                    description:
-                      "يتم تقديم المحتوى من خلال خوادم Vexora، مما يساعد على إبقاء التطبيق خفيفًا وفعالًا.",
+                  "License Activation": {
+                    title: "تفعيل الترخيص",
+                    description: "نظام تفعيل وإدارة ترخيص للوصول إلى المميزات المدعومة.",
                   },
-
-                  "Secure Activation": {
-                    title: "تفعيل آمن",
-                    description:
-                      "تستخدم Vexora نظام تفعيل لإدارة الوصول المرخص وحماية مميزات التطبيق.",
+                  "Made for You": {
+                    title: "مصمم لك",
+                    description: "التطبيق يتطور بناءً على احتياجات المستخدمين واقتراحاتهم للمحتوى.",
                   },
-
-                  "Activation Codes": {
-                    title: "أكواد التفعيل",
-                    description:
-                      "اطلب كود تفعيل وأدخله مباشرة داخل Vexora لتفعيل الترخيص الخاص بك.",
-                  },
-
-                  "Multi-Platform": {
-                    title: "متعدد المنصات",
-                    description:
-                      "استخدم Vexora على الأجهزة المدعومة، مع التخطيط لإضافة منصات ومعماريات أخرى.",
-                  },
-
-                  "Regular Updates": {
-                    title: "تحديثات مستمرة",
-                    description:
-                      "تستمر Vexora في التطور من خلال إصدارات وتحسينات ومميزات جديدة.",
+                  "WhatsApp Activation": {
+                    title: "التفعيل عبر WhatsApp",
+                    description: "إتمام الدفع والتفعيل من خلال WhatsApp بخطوات واضحة وبسيطة.",
                   },
                 };
 
@@ -1461,13 +1741,7 @@ AUTO SCROLL TO DOWNLOAD
               <button
                 type="button"
                 className="gallery-nav gallery-nav-prev"
-                onClick={() => {
-                  if (language === "ar") {
-                    previousImage();
-                  } else {
-                    previousImage();
-                  }
-                }}
+                onClick={previousImage}
                 aria-label={t.gallery.previous}
               >
                 <i className="fa-solid fa-chevron-left" />
@@ -1507,13 +1781,7 @@ AUTO SCROLL TO DOWNLOAD
               <button
                 type="button"
                 className="gallery-nav gallery-nav-next"
-                onClick={() => {
-                  if (language === "ar") {
-                    nextImage();
-                  } else {
-                    nextImage();
-                  }
-                }}
+                onClick={nextImage}
                 aria-label={t.gallery.next}
               >
                 <i className="fa-solid fa-chevron-right" />
@@ -1617,6 +1885,136 @@ AUTO SCROLL TO DOWNLOAD
           </div>
         </section>
 
+        {/* CATALOG */}
+
+        <section className="catalog-section" id="catalog">
+          <div className="catalog-copy">
+            <span className="section-label">{t.catalog.label}</span>
+            <h2>
+              {t.catalog.title1}
+              <span> {t.catalog.title2}</span>
+            </h2>
+            <p>{t.catalog.description}</p>
+            <div className="catalog-pill">
+              <i className="fa-solid fa-film" />
+              <strong>{t.catalog.badge}</strong>
+            </div>
+            <small>{t.catalog.note}</small>
+          </div>
+
+          <div className="catalog-art">
+            <div className="catalog-glow" />
+            <img
+              src={CATALOG_IMAGE}
+              alt={t.catalog.badge}
+              onError={(event) => {
+                event.currentTarget.style.display = "none";
+                event.currentTarget.parentElement.classList.add("catalog-placeholder");
+              }}
+            />
+            <div className="catalog-placeholder-content">
+              <i className="fa-solid fa-film" />
+              <strong>100+</strong>
+              <span>Movies • Series • Cartoons</span>
+            </div>
+          </div>
+        </section>
+
+        {/* HOW IT WORKS */}
+
+        <section className="journey-section" id="how-it-works">
+          <div className="section-heading">
+            <span className="section-label">{t.journey.label}</span>
+            <h2>
+              {t.journey.title1} <span>{t.journey.title2}</span>
+            </h2>
+            <p>{t.journey.description}</p>
+          </div>
+
+          <div className="journey-timeline">
+            <div className="timeline-line" />
+
+            <article className="journey-step">
+              <div className="step-number">01</div>
+              <div className="step-node"><i className="fa-solid fa-download" /></div>
+              <div className="step-card">
+                <span>01</span>
+                <h3>{t.journey.step1}</h3>
+                <p>{t.journey.step1Desc}</p>
+                <a href="#download"><i className="fa-solid fa-arrow-down" /> {t.nav.downloadButton}</a>
+              </div>
+            </article>
+
+            <article className="journey-step reverse">
+              <div className="step-number">02</div>
+              <div className="step-node"><i className="fa-brands fa-whatsapp" /></div>
+              <div className="step-card">
+                <span>02</span>
+                <h3>{t.journey.step2}</h3>
+                <p>{t.journey.step2Desc}</p>
+                <a href={ACTIVATION_URL} target="_blank" rel="noopener noreferrer">
+                  <i className="fa-brands fa-whatsapp" /> {t.journey.openWhatsApp}
+                </a>
+              </div>
+            </article>
+
+            <article className="journey-step">
+              <div className="step-number">03</div>
+              <div className="step-node"><i className="fa-solid fa-key" /></div>
+              <div className="step-card">
+                <span>03</span>
+                <h3>{t.journey.step3}</h3>
+                <p>{t.journey.step3Desc}</p>
+                <a href="#pricing"><i className="fa-solid fa-arrow-down" /> {t.nav.pricing}</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        {/* PRICING */}
+
+        <section className="pricing-section" id="pricing">
+          <div className="pricing-copy">
+            <span className="section-label">{t.pricing.label}</span>
+            <h2>
+              {t.pricing.title1} <span>{t.pricing.title2}</span>
+            </h2>
+            <p>{t.pricing.description}</p>
+
+            <div className="price-card">
+              <div className="price-top">
+                <span>{t.pricing.lifetime}</span>
+                <strong>{t.pricing.discount}</strong>
+              </div>
+              <div className="price-main">
+                <strong>{t.pricing.current}</strong>
+                <del>{t.pricing.original}</del>
+              </div>
+              <div className="price-features">
+                <div><i className="fa-solid fa-check" /> {t.pricing.noMonthly}</div>
+                <div><i className="fa-solid fa-check" /> {t.pricing.noYearly}</div>
+                <div><i className="fa-solid fa-check" /> {t.pricing.noAds}</div>
+              </div>
+              <a href={ACTIVATION_URL} target="_blank" rel="noopener noreferrer" className="price-button">
+                <i className="fa-brands fa-whatsapp" />
+                {t.pricing.button}
+              </a>
+            </div>
+          </div>
+
+          <div className="special-card">
+            <div className="special-icon"><i className="fa-solid fa-gem" /></div>
+            <span className="section-label">{t.pricing.label}</span>
+            <h3>{t.pricing.specialTitle}</h3>
+            <div className="special-list">
+              <div><i className="fa-solid fa-star" /><span>{t.pricing.special1}</span></div>
+              <div><i className="fa-solid fa-star" /><span>{t.pricing.special2}</span></div>
+              <div><i className="fa-solid fa-star" /><span>{t.pricing.special3}</span></div>
+            </div>
+            <div className="special-glow" />
+          </div>
+        </section>
+
         {/* ACTIVATION */}
 
         <section
@@ -1666,18 +2064,16 @@ AUTO SCROLL TO DOWNLOAD
 
               </div>
 
-              {/* <a
+              <a
                 href={ACTIVATION_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="activation-link"
               >
                 <i className="fa-brands fa-whatsapp" />
-
-                {t.activation.button}
-
+                {language === "ar" ? "التفعيل والدفع عبر WhatsApp" : "Payment & Activation via WhatsApp"}
                 <i className="fa-solid fa-arrow-up-right-from-square" />
-              </a> */}
+              </a>
 
             </div>
 
@@ -2190,6 +2586,14 @@ AUTO SCROLL TO DOWNLOAD
                 {t.footer.gallery}
               </a>
 
+              <a href="#how-it-works">
+                {t.nav.guide}
+              </a>
+
+              <a href="#pricing">
+                {t.nav.pricing}
+              </a>
+
               <a href="#download">
                 {t.footer.download}
               </a>
@@ -2333,13 +2737,7 @@ AUTO SCROLL TO DOWNLOAD
             <button
               type="button"
               className="lightbox-nav lightbox-prev"
-              onClick={() => {
-                if (language === "ar") {
-                  nextImage();
-                } else {
-                  previousImage();
-                }
-              }}
+              onClick={previousImage}
               aria-label={
                 t.gallery.previous
               }
@@ -2372,13 +2770,7 @@ AUTO SCROLL TO DOWNLOAD
             <button
               type="button"
               className="lightbox-nav lightbox-next"
-              onClick={() => {
-                if (language === "ar") {
-                  previousImage();
-                } else {
-                  nextImage();
-                }
-              }}
+              onClick={nextImage}
               aria-label={
                 t.gallery.next
               }
