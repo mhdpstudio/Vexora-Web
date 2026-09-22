@@ -1,0 +1,346 @@
+.contact-page {
+    width: min(1100px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 90px 0 110px;
+}
+
+/* =========================
+   Header
+========================= */
+
+.contact-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 55px;
+}
+
+.contact-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px 14px;
+    margin-bottom: 18px;
+
+    border: 1px solid rgba(95, 201, 69, 0.25);
+    border-radius: 999px;
+
+    background: rgba(95, 201, 69, 0.07);
+    color: #5fc945;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.contact-header h1 {
+    margin: 0 0 14px;
+
+    color: #f1f5f1;
+
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.contact-header p {
+    margin: 0;
+
+    color: #858e87;
+
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* =========================
+   Cards
+========================= */
+
+.contact-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.contact-card {
+    position: relative;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(95, 201, 69, 0.055),
+            rgba(13, 17, 14, 0.96) 45%
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.contact-card::before {
+    content: "";
+
+    position: absolute;
+    top: -100px;
+    right: -100px;
+
+    width: 220px;
+    height: 220px;
+
+    background: rgba(95, 201, 69, 0.06);
+
+    border-radius: 50%;
+
+    filter: blur(20px);
+
+    pointer-events: none;
+}
+
+.contact-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(95, 201, 69, 0.25);
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+   Icon
+========================= */
+
+.contact-icon {
+    flex: 0 0 58px;
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(95, 201, 69, 0.1);
+
+    border: 1px solid rgba(95, 201, 69, 0.18);
+    border-radius: 17px;
+
+    color: #5fc945;
+
+    font-size: 25px;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+.contact-card:hover .contact-icon {
+    background: rgba(95, 201, 69, 0.16);
+    transform: scale(1.05);
+}
+
+/* =========================
+   Content
+========================= */
+
+.contact-content {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #5fc945;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.contact-content h2 {
+    margin: 0 0 10px;
+
+    color: #f1f5f1;
+
+    font-size: 24px;
+    font-weight: 750;
+}
+
+.contact-content p {
+    margin: 0 0 22px;
+
+    color: #858e87;
+
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* =========================
+   WhatsApp Button
+========================= */
+
+.contact-content button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    padding: 11px 16px;
+
+    border: 1px solid rgba(95, 201, 69, 0.25);
+    border-radius: 11px;
+
+    background: rgba(95, 201, 69, 0.08);
+
+    color: #5fc945;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.contact-content button:hover {
+    background: #5fc945;
+    border-color: #5fc945;
+
+    color: #071008;
+
+    transform: translateY(-2px);
+}
+
+/* =========================
+   Number
+========================= */
+
+.contact-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    margin: 35px auto 0;
+    padding: 17px 25px;
+
+    width: fit-content;
+
+    background: #0d110e;
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+}
+
+.contact-number span {
+    color: #858e87;
+
+    font-size: 13px;
+}
+
+.contact-number strong {
+    color: #f1f5f1;
+
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+/* =========================
+   Arabic
+========================= */
+
+[dir="rtl"] .contact-card {
+    text-align: right;
+}
+
+[dir="rtl"] .contact-content button {
+    direction: rtl;
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 800px) {
+    .contact-page {
+        padding: 70px 0 90px;
+    }
+
+    .contact-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 550px) {
+    .contact-page {
+        width: min(100% - 28px, 1100px);
+    }
+
+    .contact-header {
+        margin-bottom: 40px;
+    }
+
+    .contact-header h1 {
+        font-size: 38px;
+    }
+
+    .contact-header p {
+        font-size: 14px;
+    }
+
+    .contact-card {
+        gap: 16px;
+        padding: 22px;
+        border-radius: 18px;
+    }
+
+    .contact-icon {
+        flex-basis: 50px;
+
+        width: 50px;
+        height: 50px;
+
+        border-radius: 14px;
+
+        font-size: 21px;
+    }
+
+    .contact-content h2 {
+        font-size: 20px;
+    }
+
+    .contact-content p {
+        font-size: 13px;
+    }
+
+    .contact-content button {
+        width: 100%;
+    }
+
+    .contact-number {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}

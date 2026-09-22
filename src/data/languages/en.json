@@ -1,0 +1,184 @@
+{
+    "nav": {
+        "home": "Home",
+        "download": "Download",
+        "about": "About Vexora",
+        "contact": "Contact"
+    },
+    "language": {
+        "arabic": "العربية",
+        "english": "English"
+    },
+    "home": {
+        "hero": {
+            "title": "A Different Experience Starts Here",
+            "description": "Watch, explore, and save your favorite content in a simple and fast experience with Vexora.",
+            "download": "Download Vexora",
+            "explore": "Explore More — Learn more about App's Shape",
+            "noAds": "No Ads",
+            "cardText": "Simple and fast experience"
+        },
+        "details": {
+            "badge": "Vexora",
+            "title": "Everything You Need in One Place",
+            "description": "Vexora provides a simple and fast experience without ads, with support for PC and mobile devices.",
+            "noAds": {
+                "title": "No Ads",
+                "description": "Enjoy a clean experience without annoying advertisements or pop-ups."
+            },
+            "lifetime": {
+                "title": "Lifetime Access",
+                "description": "Pay once and get access to Vexora for a lifetime."
+            },
+            "platforms": {
+                "title": "Windows & Android",
+                "description": "Use Vexora on your PC, phone, or tablet with the version that fits your device."
+            }
+        },
+        "steps": {
+            "badge": "Getting Started",
+            "title": "Start Using Vexora in 4 Steps",
+            "description": "It's simple. Download the app, activate it, and start enjoying Vexora.",
+            "download": {
+                "number": "01",
+                "title": "Download the App",
+                "description": "Download the version that matches your device from the download page."
+            },
+            "whatsapp": {
+                "number": "02",
+                "title": "Request a Code via WhatsApp",
+                "description": "Contact us on WhatsApp to receive your activation code."
+            },
+            "payment": {
+                "number": "03",
+                "title": "Complete the Payment",
+                "description": "Complete the payment to get your Vexora lifetime license."
+            },
+            "activation": {
+                "number": "04",
+                "title": "Activate the App",
+                "description": "Enter your activation code inside the app and start using Vexora."
+            }
+        },
+        "cta": {
+            "badge": "Limited-Time Offer",
+            "title": "Vexora Now for Only 300 EGP",
+            "description": "Originally 600 EGP — get 50% off with a one-time lifetime payment.",
+            "button": "Download Vexora"
+        }
+    },
+    "footer": {
+        "description": "A modern and simple experience, made with passion.",
+        "navigation": {
+            "title": "Navigation",
+            "home": "Home",
+            "download": "Download",
+            "about": "About Vexora",
+            "contact": "Contact"
+        },
+        "support": {
+            "title": "Support",
+            "contact": "Contact Us",
+            "privacy": "Privacy Policy",
+            "terms": "Terms & Conditions"
+        },
+        "madeBy": "Made by MhdP Studio"
+    },
+    "download": {
+        "title": "Download Vexora",
+        "description": "Choose the right version for your device and start using Vexora.",
+        "priceLabel": "Price",
+        "currency": "EGP",
+        "lifetime": "One-time payment • Lifetime access • No monthly or yearly subscription",
+        "available": "Available",
+        "comingSoon": "Coming Soon",
+        "downloadButton": "Download",
+        "version": "Version",
+        "size": "Size",
+        "loading": "Loading version information...",
+        "error": "Unable to load version information right now.",
+        "computer": "For PC",
+        "phoneTablet": "For phone & tablet",
+        "discount": "50% OFF",
+        "oldPrice": "600",
+        "platforms": {
+            "win64": "For Windows 10 and above",
+            "win32": "For Windows 8, 7 and below",
+            "android": "For phone & tablet",
+            "other": "Additional release"
+        }
+    },
+    "about": {
+        "video": {
+            "badge": "Watch Vexora",
+            "title": "See How Vexora Works",
+            "description": "Watch a quick guide that shows you how to use Vexora and explore its main features.",
+            "unsupported": "Your browser does not support video playback."
+        },
+        "gallery": {
+            "badge": "Inside Vexora",
+            "title": "Explore the App",
+            "description": "Take a quick look at the Vexora interface, design, and overall experience."
+        },
+        "info": {
+            "badge": "About Vexora",
+            "title": "Simple, Fast and Comfortable",
+            "description": "Vexora is designed to provide a simple and organized viewing experience with a clean interface and fast access to content."
+        },
+        "features": {
+            "badge": "Features",
+            "title": "Everything You Need in Vexora",
+            "description": "A collection of features designed to make your experience easier and faster.",
+            "server": {
+                "title": "Server-Based Content",
+                "description": "Content and data are retrieved from the server, allowing updates without requiring you to reinstall the application."
+            },
+            "activation": {
+                "title": "Activation Code",
+                "description": "Vexora uses a simple activation system with a dedicated code to access the application."
+            },
+            "easy": {
+                "title": "Easy to Use",
+                "description": "A simple and organized interface that makes accessing and using the application easy."
+            },
+            "content": {
+                "title": "100+ Cartoons",
+                "description": "Enjoy a large library with more than 100 cartoons."
+            },
+            "search": {
+                "title": "Fast Search",
+                "description": "Quickly search for the cartoon or content you want to watch."
+            },
+            "devices": {
+                "title": "Multiple Devices",
+                "description": "Use Vexora on PC, phone, or tablet depending on the available version."
+            }
+        },
+        "cta": {
+            "badge": "Get Started",
+            "title": "Ready to Try Vexora?",
+            "description": "Download the app and start your experience today.",
+            "button": "Download Vexora"
+        }
+    },
+    "contact": {
+        "badge": "CONTACT US",
+        "title": "We're Here to Help",
+        "description": "Have a question or need help? Contact us directly through WhatsApp.",
+        "general": {
+            "label": "CONTACT",
+            "title": "Get in Touch",
+            "description": "For general inquiries and to get in touch with the Vexora team.",
+            "button": "Contact Us on WhatsApp",
+            "message": "Hello, I would like to contact the Vexora team."
+        },
+        "support": {
+            "label": "TECHNICAL SUPPORT",
+            "title": "Technical Support",
+            "description": "Having an issue with the app or activation? Contact us and we'll help you.",
+            "button": "Contact Technical Support",
+            "message": "Hello, I need technical support for the Vexora application."
+        },
+        "whatsapp": "WhatsApp"
+    }
+}
